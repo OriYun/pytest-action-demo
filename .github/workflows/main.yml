@@ -11,6 +11,12 @@ jobs:
         python-version: ["3.9"]
 
     steps:
+      - name: Print
+        run: |
+          pwd
+      - name: List
+        run:|
+          ls /path/to/log/directory
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
