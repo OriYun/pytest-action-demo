@@ -1,2 +1,2 @@
 def twice(x):
-    return x * 4
+    return x * 2
