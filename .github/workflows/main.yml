@@ -16,8 +16,7 @@ jobs:
           pwd
       - name: List
         run: |
-          ls /var/log
-          ls ${GITHUB_WORKSPACE}/
+          ls ${GITHUB_WORKSPACE}
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
