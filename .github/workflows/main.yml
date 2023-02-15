@@ -36,3 +36,21 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
+      - name: Archive logs
+        uses: actions/upload-artifacts@v2
+        with:
+          name: logs
+          path: |
+            *.log
+            *.txt
+
+  download-log:
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+      - name: Download log file
+        uses: actions/download-artifacts@v2
+        with:
+          name: logs
+      - name: Print downloded log file
+        run: cat ${{ github.workspace }}/logs*.txt
