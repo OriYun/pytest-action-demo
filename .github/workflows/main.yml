@@ -15,7 +15,7 @@ jobs:
         run: |
           pwd
       - name: List
-        run:|
+        run: |
           ls /path/to/log/directory
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
