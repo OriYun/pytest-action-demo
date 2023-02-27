@@ -40,6 +40,8 @@ jobs:
           path: |
             *.log
             *.txt
+      - name: Gradle clean
+        run: (./gradlew build 2>&1) | tee /tmp/gradle.out
 
   download-log:
     runs-on: ubuntu-22.04
