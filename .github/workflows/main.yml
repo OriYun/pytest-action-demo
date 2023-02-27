@@ -35,8 +35,9 @@ jobs:
           pytest
 
   artif:
+    runs-on: ubuntu-22.04
+    
     steps:
-      runs-on: ubuntu-22.04
       - uses: actions/checkout@v3
 
       - run: mkdir -p my_artifact/
