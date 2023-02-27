@@ -28,6 +28,5 @@ jobs:
         with:
           name: logs
           path: |
-            ${{ github.workspace }}/main.log
-          if-no-files-found: error
-          retention-days: 7
+            log.txt
+            ${{ github.workspace }}/logs/
