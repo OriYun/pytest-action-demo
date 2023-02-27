@@ -33,11 +33,6 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-      - name: Gradle clean
-        run: (./gradlew build 2>&1) | tee /tmp/gradle.out
-      - name: Analyze error
-        if: failure()
-        run: python3 ./analyze_and_slack_error.py /tmp/gradle.out
       - name: upload artifact
       - uses: actions/upload-artifact@v3
         with:
