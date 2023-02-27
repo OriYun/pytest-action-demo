@@ -33,8 +33,3 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-      - name: upload artifact
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: /home/runner/work/pytest-action-demo/pytest-action-demo/workflowRes.txt
