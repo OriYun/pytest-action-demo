@@ -11,20 +11,20 @@ jobs:
         python-version: ["3.9"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3 | tee -a log.txt
       - name: Setup Python # Set Python version
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4 | tee -a log.txt
         with:
           python-version: ${{ matrix.python-version }}
       # Install pip and pytest
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pytest
+          python -m pip install --upgrade pip | tee -a log.txt
+          pip install pytest | tee -a log.txt
       - name: Test with pytest
         run: pytest | tee -a log.txt
       - name: Upload pytest test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3 | tee -a log.txt
         with:
           name: full-log
           path: log.txt
