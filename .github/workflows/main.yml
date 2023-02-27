@@ -33,18 +33,9 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-
-  artif:
-    runs-on: ubuntu-22.04
-    
-    steps:
       - uses: actions/checkout@v3
-
       - run: mkdir -p my_artifact/
-
-      - run: echo hello > my_artifact/world.txt
-
       - uses: actions/upload-artifact@v3
         with:
           name: arti
-          path: my_artifact/
+          path: my_artifact
