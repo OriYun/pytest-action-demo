@@ -47,4 +47,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: arti
-          path: my_artifact/world.txt
+          path: my_artifact/
