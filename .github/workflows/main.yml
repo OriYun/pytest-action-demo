@@ -1,44 +1,22 @@
-name: Run tests for my project
+name: Upload recent log files
 
 on: [push, workflow_dispatch]
 
 jobs:
-  build:
-
+  upload:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        python-version: ["3.9"]
-
     steps:
-      - name: Print
+      - name: find-r
         run: |
-          pwd
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Lint with flake8
-        run: |
-          # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with pytest
-        run: |
-          pytest
-      - name: List
-        run: |
-          sudo find / -name '*.log' -mmin -3
+          log_files=$(find /home/runner/runners/ -type f -name "*.log" -mmin -3)
+          echo "::set-output name=log_files::$log_files"
+        id: find_logs  
+
       - name: Upload modified log files
         uses: actions/upload-artifact@v3
         with:
           name: modified-logs
           path: |
-            /home/runner/runners/
+            {% for file_path in steps.find_logs.outputs.log_files.split('\n') %}
+              {{ file path }}
+            {% endfor %}
