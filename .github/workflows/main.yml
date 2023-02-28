@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@OriYun 
-OriYun
-/
-pytest-action-demo
-Public
-Cannot fork because you own this repository and are not a member of any organizations.
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Beta Try the new code view
-pytest-action-demo/.github/workflows/main.yml
-@OriYun
-OriYun Update main.yml
-Latest commit 0f68e9e 2 weeks ago
- History
- 1 contributor
-56 lines (51 sloc)  1.55 KB
-
 name: Run tests for my project
 
 on: [push, workflow_dispatch]
