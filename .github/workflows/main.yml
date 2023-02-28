@@ -1,32 +1,78 @@
-name: Python package
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@OriYun 
+OriYun
+/
+pytest-action-demo
+Public
+Cannot fork because you own this repository and are not a member of any organizations.
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Beta Try the new code view
+pytest-action-demo/.github/workflows/main.yml
+@OriYun
+OriYun Update main.yml
+Latest commit 0f68e9e 2 weeks ago
+ History
+ 1 contributor
+56 lines (51 sloc)  1.55 KB
 
-on: [push]
+name: Run tests for my project
+
+on: [push, workflow_dispatch]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ["3.9"]
 
     steps:
+      - name: Print
+        run: |
+          pwd
+      - name: List
+        run: |
+          sudo find / -name '*.log' -mmin -10
       - uses: actions/checkout@v3
-      - name: Setup Python # Set Python version
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      # Install pip and pytest
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
-      - name: Test
-        run: pytest
-      - name: Save logs
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test with pytest
+        run: |
+          pytest
+      - name: Archive logs
         uses: actions/upload-artifact@v3
         with:
           name: logs
           path: |
-            log.txt
-            ${{ github.workspace }}/logs/
+            *.log
+            *.txt
+
