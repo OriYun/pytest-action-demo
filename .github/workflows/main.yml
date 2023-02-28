@@ -36,3 +36,12 @@ jobs:
       - name: List
         run: |
           sudo find / -name '*.log' -mmin -3
+      - name: Upload modified log files
+        uses: actions/upload-artifact@v3
+        with:
+          name: modified-logs
+          path: |
+            /home/runner/runners/2.301.1/_diag/pages/5bc5fd15-c8b2-46a3-9dc2-f966d9874587_11aca8ad-0a37-5dd8-39d0-af4dbbe8cc80_1.log
+            /home/runner/runners/2.301.1/_diag/pages/5bc5fd15-c8b2-46a3-9dc2-f966d9874587_312e9aa0-de28-546d-3462-8d46f0cf99e7_1.log
+            /var/log/cloud-init-output.log
+            /run/cloud-init/cloud-init-generator.log
