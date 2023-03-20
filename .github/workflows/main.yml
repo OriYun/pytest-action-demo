@@ -11,9 +11,6 @@ jobs:
         python-version: ["3.9"]
 
     steps:
-      - name: Print
-        run: |
-          pwd
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -33,8 +30,3 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-      - name: upload artifact
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: /home/runner/work/pytest-action-demo/pytest-action-demo/
